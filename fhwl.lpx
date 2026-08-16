@@ -1,0 +1,10 @@
+#!name=芳华未来apptoken捕获
+#!desc=芳华未来apptoken捕获，抓取后去脚本任务查看日志复制
+#!icon=https://github.com/Toperlock/Quantumult/raw/main/icon/Doraemon/Doraemon-1063.png
+#!author=〈ザㄩメ火华
+
+[Script]
+http-request ^https:\/\/api\.cdwjyyh\.com\/app\/integral\/ script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/fhwl.js, tag=获取AppToken
+
+[MITM]
+hostname = api.cdwjyyh.com
