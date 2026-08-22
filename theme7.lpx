@@ -1,18 +1,15 @@
 #!name=Theme7签到
-#!desc=Theme7每日签到，
+#!desc=Theme7每日签到
 #!author=〈ザㄩメ火华
 #!icon= https://raw.githubusercontent.com/yuhuohua/tupiao/refs/heads/main/theme7.png
 #!tag=〈ザㄩメ火华
-#!arguments-desc=CRON定时设置: 签到脚本的 CRON 表达式; Token获取开关: 填写 # 即可禁用Token捕获
 
 [Argument]
-TokenSwitch = switch, true, true, tag = 抓取Token开关, desc = 默认开启。抓取Token成功后, 可关闭此开关
-CRON定时设置=input,0 9 * * *,tag=CRON定时设置, desc=CRON定时设置
+Token获取开关 = switch, true, true, tag = 抓取Token开关, desc = 默认开启。抓取Token成功后, 可关闭此开关
+
+CRON定时设置 = input, "0 9 * * *", tag = CRON定时设置, desc = CRON定时设置
 
 [Script]
-{TokenSwitch}http-request ^https:\/\/theme7.cn\/api\/v1\/public\/oauth\/profile script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/theme7tk.jsjs, requires-body=0, max-size=0, tag=Theme7获取
+http-response ^https:\/\/theme7.cn\/api\/v1\/public\/oauth\/profile script-path= https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/theme7tk.js, requires-body=true, timeout=60, tag= Theme7token获取, enable = {Token获取开关}
 
-cron{CRON定时设置}script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/theme7.jss, wake-system=1, tag=Theme7签到
-
-[MITM]
-hostname = theme7.cn
+cron {CRON定时设置} script-path= https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/theme7.js, timeout=60, tag= Theme7签到
