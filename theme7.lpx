@@ -6,7 +6,7 @@
 #!arguments-desc=CRON定时设置: 签到脚本的 CRON 表达式; Token获取开关: 填写 # 即可禁用Token捕获
 
 [Argument]
-CRON定时设置=input,0 9 * * *,tag=CRON定时设置, desc=CRON定时设置
+CRON定时设置=input,"0 9 * * *",tag=CRON定时设置, desc=CRON定时设置
 TokenSwitch = input, "", tag=Token获取开关, desc=留空打开，填#关闭
 
 [Script]
