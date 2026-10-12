@@ -1,0 +1,25 @@
+#!name=中国移动 (多卡保活)
+#!desc=支持多号码保活。先在「中国移动」App 用短信验证码登录一次自动捕获加密参数。\n\n[配置参数]\n⓵ 抓取开关: 默认开启，所有账号抓取成功后可关闭以节省资源。\n⓶ 刷新Cron: 定时保活与后台数据拉取执行周期（默认每 20 分钟）。\n⓷ 账号参数: 格式为 标签#手机号（如：主号#13800138000 或直接填 13800138000）。在数据前加上 // 可跳过此账号。不填留空即可。
+#!icon=https://raw.githubusercontent.com/yuhuohua/tupiao/refs/heads/main/zgyd.png
+
+[Argument]
+ENABLE_CAPTURE = switch, true, true, tag=抓取开关, desc=默认开启。抓取到所有账号参数后，可关闭此开关以节省性能
+CRON_EXP = input,"*/20 * * * *",tag=刷新Cron,desc=定时保活与后台数据拉取执行周期（默认每 20 分钟）
+ACCOUNT1 = input,"",tag=号码1,desc=手机号
+ACCOUNT2 = input,"",tag=号码2,desc=手机号
+ACCOUNT3 = input,"",tag=号码3,desc=手机号
+ACCOUNT4 = input,"",tag=号码4,desc=手机号
+ACCOUNT5 = input,"",tag=号码5,desc=手机号
+
+[Script]
+# 登录参数捕获
+http-request ^https?:\/\/(client\.app\.coc\.10086\.cn|10086\.online-cmcc\.cn)(:\d+)?\/ script-path=zgydloon.js, requires-body=true, timeout=15, tag=中国移动登录捕获, enable={ENABLE_CAPTURE}
+
+# Cookie 刷新捕获
+http-response ^https?:\/\/(client\.app\.coc\.10086\.cn|10086\.online-cmcc\.cn)(:\d+)?\/ script-path=zgydloon.js, requires-body=false, timeout=15, tag=中国移动Cookie捕获, enable={ENABLE_CAPTURE}
+
+# 定时保活任务 (Loon 专用 Argument 数组格式)
+cron {CRON_EXP} script-path=zgydloon.js, timeout=60, tag=中国移动后台保活, argument=[{ACCOUNT1},{ACCOUNT2},{ACCOUNT3},{ACCOUNT4},{ACCOUNT5}]
+
+[Mitm]
+hostname = client.app.coc.10086.cn, 10086.online-cmcc.cn, *.10086.cn
