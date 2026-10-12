@@ -13,13 +13,13 @@ ACCOUNT5 = input,"",tag=号码5,desc=手机号
 
 [Script]
 # 登录参数捕获
-http-request ^https?:\/\/(client\.app\.coc\.10086\.cn|10086\.online-cmcc\.cn)(:\d+)?\/ script-path=zgydloon.js, requires-body=true, timeout=15, tag=中国移动登录捕获, enable={ENABLE_CAPTURE}
+http-request ^https?:\/\/(client\.app\.coc\.10086\.cn|10086\.online-cmcc\.cn)(:\d+)?\/ script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/zgydloon.js, requires-body=true, timeout=15, tag=中国移动登录捕获, enable={ENABLE_CAPTURE}
 
 # Cookie 刷新捕获
-http-response ^https?:\/\/(client\.app\.coc\.10086\.cn|10086\.online-cmcc\.cn)(:\d+)?\/ script-path=zgydloon.js, requires-body=false, timeout=15, tag=中国移动Cookie捕获, enable={ENABLE_CAPTURE}
+http-response ^https?:\/\/(client\.app\.coc\.10086\.cn|10086\.online-cmcc\.cn)(:\d+)?\/ script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/zgydloon.js, requires-body=false, timeout=15, tag=中国移动Cookie捕获, enable={ENABLE_CAPTURE}
 
 # 定时保活任务 (Loon 专用 Argument 数组格式)
-cron {CRON_EXP} script-path=zgydloon.js, timeout=60, tag=中国移动后台保活, argument=[{ACCOUNT1},{ACCOUNT2},{ACCOUNT3},{ACCOUNT4},{ACCOUNT5}]
+cron {CRON_EXP} script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/zgydloon.js, timeout=60, tag=中国移动后台保活, argument=[{ACCOUNT1},{ACCOUNT2},{ACCOUNT3},{ACCOUNT4},{ACCOUNT5}]
 
 [Mitm]
 hostname = client.app.coc.10086.cn, 10086.online-cmcc.cn, *.10086.cn
