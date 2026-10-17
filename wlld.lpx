@@ -4,7 +4,7 @@
 #!author=〈ザㄩメ火华
 
 [Script]
-http-request ^http://netradar\.loon\.api script-path= https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/wlld.js, requires-body=true, timeout=10, tag=网络雷达
+http-request ^http://netradar\.loon\.api script-path= wlld.js, requires-body=true, timeout=10, tag=网络雷达
 
 [MITM]
 hostname = netradar.loon.api
