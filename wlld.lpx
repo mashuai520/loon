@@ -4,7 +4,7 @@
 #!author=〈ザㄩメ火华
 [Script]
 # 注意：requires-body 必须是 false 或者不写
-http-request ^http://netradar\.loon\.api script-path=wlld.js, requires-body=false, timeout=15, tag=网络雷达API
+http-request ^http://netradar\.loon\.api script-path=wlld.js, requires-body=false, timeout=60, tag=网络雷达API
 
 [MITM]
 hostname = netradar.loon.api
