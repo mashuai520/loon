@@ -9,7 +9,7 @@
 CRON定时设置=input,"0 12 * * *",tag=CRON定时设置, desc=CRON定时设置
 
 [Script]
-http-request ^https:\/\/h5\.youzan\.com\/(wscuser|wscdeco|wscump)\/ script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/szss_token.js, requires-body=false, tag=三只松鼠_获取Token
+http-request ^https:\/\/h5\.youzan\.com\/(wscuser|wscdeco|wscump)\/ script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/szss_token.js, tag=三只松鼠_获取Token
 
 cron "{{{CRON定时设置}}}" script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/szss.js, timeout=30, tag=三只松鼠_自动签到
 
