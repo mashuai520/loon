@@ -12,4 +12,4 @@ http-request ^https:\/\/h5\.youzan\.com\/(wscuser|wscdeco|wscump)\/ script-path=
 cron {CRON定时设置} script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/szss.js, timeout=30, tag=三只松鼠_自动签到
 
 [MITM]
-hostname = %APPEND% h5.youzan.com
+hostname = h5.youzan.com
