@@ -9,15 +9,9 @@
 CRON定时设置=input,"0 12 * * *",tag=CRON定时设置, desc=CRON定时设置
 
 [Script]
-# 抓取Token脚本
-http-response ^https:\/\/xcx\.myinyun\.com:4438\/napi\/wx\/login script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/sjtoken.js, requires-body=true, timeout=60, tag=声荐自动抓取token, enable = {enable_token_capture}
-
-# 每日任务脚本 (注意 argument 参数的传递)
-cron {CRON定时设置} script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/sj.js, timeout=60, tag=声荐每日任务, argument=[{summary_notify}]
-
 http-request ^https:\/\/h5\.youzan\.com\/(wscuser|wscdeco|wscump)\/ script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/szss_token.js, tag=三只松鼠_获取Token
 
-cron "{{{CRON定时设置}}}" script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/szss.js, timeout=30, tag=三只松鼠_自动签到
+cron {CRON定时设置} script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/szss.js, timeout=30, tag=三只松鼠_自动签到, argument=[{summary_notify}]
 
 [MITM]
 hostname = %APPEND% h5.youzan.com
