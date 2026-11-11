@@ -1,0 +1,15 @@
+#!name=鸿星尔克官方会员签到
+#!desc=微信鸿星尔克官方会员中心小程序每日签到
+#!category=每日签到
+
+[Argument]
+CRON定时设置 = input, "30 12 * * *", tag=CRON定时设置, desc=签到脚本的 CRON 表达式(默认12点30分运行)
+抓取开关 = switch, true, true, tag=抓取Token开关, desc=默认开启。抓取Token成功后，可关闭此开关
+
+[Script]
+http-request ^https:\/\/hope\.demogic\.com\/gic-wx-app\/(.*) script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/hxek.js, tag=鸿星尔克获取Token, requires-body=true, enable={抓取开关}
+
+cron {CRON定时设置} script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/hxek.js, tag=鸿星尔克定时签到, timeout=60
+
+[MITM]
+hostname = hope.demogic.com
