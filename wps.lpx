@@ -1,0 +1,14 @@
+#!name=😀 WPS 每日签到 + 福利中心多项任务
+#!desc=使用步骤：1、按下方对应平台配置,开启重写脚本 + cron。2、打开「WPS」APP → 进任意活动页(任务中心 / 福利中心「天天领福利」)停留 1 秒。3、收到 ✅ WPS Cookie 获取成功 通知即抓取成功。4、cron 每天 10:00 触发
+
+[Argument]
+CRON定时设置 = input, "0 9 * * *", tag=CRON定时设置, desc=签到脚本的 CRON 表达式
+Token获取开关 = switch, true, true, tag=Token获取开关, desc=默认开启。抓取Token成功后，可关闭此开关
+
+[Script]
+http-request ^https:\/\/personal-act\.wps\.cn\/activity-rubik\/activity\/page_info script-path=https://raw.githubusercontent.com/MaYIHEI/paperclip/refs/heads/main/app/wps/wps.cookie.js, tag=WPS Cookie, requires-body=false, enable={Token获取开关}
+
+cron {CRON定时设置} script-path=https://raw.githubusercontent.com/MaYIHEI/paperclip/refs/heads/main/app/wps/wps.js, tag=WPS签到, timeout=120
+
+[MITM]
+hostname = personal-act.wps.cn
