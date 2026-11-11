@@ -1,0 +1,16 @@
+#!name=奈雪点单每日签到
+#!desc=奈雪点单微信小程序每日签到
+#!category=每日签到
+#!author=〈ザㄩメ火华
+
+[Argument]
+CRON定时设置 = input, "30 12 * * *", tag=CRON定时设置, desc=签到脚本的 CRON 表达式(默认12点30分运行)
+抓取开关 = switch, true, true, tag=抓取Token开关, desc=默认开启。抓取Token成功后，可关闭此开关
+
+[Script]
+http-request ^https:\/\/(tm-api|tm-web)\.pin-dao\.cn\/ script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/nxdd.js, tag=奈雪点单获取Token, requires-header=true, enable={抓取开关}
+
+cron {CRON定时设置} script-path=https://raw.githubusercontent.com/yuhuohua/jb/refs/heads/main/nxdd.js, tag=奈雪点单定时签到, timeout=60
+
+[MITM]
+hostname = tm-web.pin-dao.cn, tm-api.pin-dao.cn
